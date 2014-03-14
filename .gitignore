@@ -1,0 +1,6 @@
+*.sublime*
+temp/
+Documention/
+bin/
+build/
+lib/

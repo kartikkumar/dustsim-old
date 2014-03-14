@@ -3,7 +3,7 @@ DustSim
 
 DustSim is a tool that can be used to study the dynamics of dust particles in planetary environments.
 
-This toolbox is written iuusing the following open-source libraries:
+This toolbox was authored using the following open-source libraries:
 
 - Eigen (http://eigen.tuxfamily.org/)
 - Boost (http://www.boost.org)
