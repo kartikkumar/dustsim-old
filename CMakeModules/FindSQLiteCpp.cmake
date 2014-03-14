@@ -8,7 +8,7 @@
 # or copy at http://opensource.org/licenses/MIT)
 
 macro(_sqlitecpp_check_version)
-  file(READ "${SQLITECPP_INCLUDE_DIR}/SQLiteC++.h" _sqlitecpp_header)
+  file(READ "${SQLITECPP_INCLUDE_DIR}/SQLiteCpp.h" _sqlitecpp_header)
 
   string(REGEX MATCH "define[ \t]+SQLITECPP_VERSION_NUMBER[ \t]+([0-9]+)" 
          _sqlitecpp_version_match "${_sqlitecpp_header}")
@@ -34,17 +34,17 @@ if(SQLITECPP_INCLUDE_DIR)
   set(SQLITECPP_FOUND ${SQLITECPP_VERSION_OK})
 
 else (SQLITECPP_INCLUDE_DIR)
-  find_path(SQLITECPP_BASE_PATH NAMES SQLiteC++.h
+  find_path(SQLITECPP_BASE_PATH NAMES SQLiteCpp.h
       PATHS
       ${PROJECT_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/..
       ${PROJECT_SOURCE_DIR}/../..
       ${PROJECT_SOURCE_DIR}/../../..
-      PATH_SUFFIXES SQLiteCpp/src
+      PATH_SUFFIXES SQLiteCpp/include/SQLiteCpp
     )
   set(SQLITECPP_INCLUDE_DIR ${SQLITECPP_BASE_PATH})
-  set(SQLITECPP_LIBRARY_DIR ${SQLITECPP_BASE_PATH}/../lib)
-
+  set(SQLITECPP_LIBRARY_DIR ${SQLITECPP_BASE_PATH}/../../build)
+  message(${PROJECT_SOURCE_DIR})
   if(SQLITECPP_INCLUDE_DIR)
     _sqlitecpp_check_version()
   endif(SQLITECPP_INCLUDE_DIR)
