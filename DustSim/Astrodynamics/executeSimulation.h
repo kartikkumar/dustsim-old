@@ -118,11 +118,11 @@ void executeSimulation( const database::CaseDataPointer caseData )
                 caseData->initialStateInKeplerianElements,
                 std::numeric_limits< double >::epsilon( ),
                 std::numeric_limits< double >::max( ),
-                1.0e-12,
-                1.0e-7 );
+                caseData->numericalIntegratorRelativeTolerance,
+                caseData->numericalIntegratorAbsoluteTolerance );
 
     // Perform integration.
-    integrator->performIntegrationStep( 60.0 ); 
+    integrator->performIntegrationStep( caseData->numericalIntegratorInitialStepSize ); 
 
     ///////////////////////////////////////////////////////////////////////////            
 }

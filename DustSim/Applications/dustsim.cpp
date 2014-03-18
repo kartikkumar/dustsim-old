@@ -247,17 +247,16 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     cout << "****************************************************************************" << endl;
     cout << endl;
 
-    // Set coefficient set selected for numerical integrator.
-    RungeKuttaCoefficients rungeKuttaCoefficients 
-        = getRungeKuttaCoefficients( numericalIntegratorType );
-
     // Store data in case data structure.
     CaseDataPointer caseData = make_shared< CaseData >( 1, 
                                                         caseName, 
                                                         maximumSimulationPeriod,
                                                         initialStateInKeplerianElements,
                                                         centralBodyGravitationalParameter,
-                                                        numericalIntegratorType );
+                                                        numericalIntegratorType,
+                                                        numericalIntegratorInitialStepSize,
+                                                        numericalIntegratorRelativeTolerance,
+                                                        numericalIntegratorAbsoluteTolerance );
         
     ///////////////////////////////////////////////////////////////////////////
 

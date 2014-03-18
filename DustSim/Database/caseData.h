@@ -46,7 +46,10 @@ public:
              const double aMaximumSimulationPeriod,
              const tudat::basic_mathematics::Vector6d anInitialStateInKeplerianElements,
              const double aCentralBodyGravitationalParameter,
-             const std::string& aNumericalIntegratorType );
+             const std::string& aNumericalIntegratorType,
+             const double aNumericalIntegratorInitialStepSize,
+             const double aNumericalIntegratorRelativeTolerance,
+             const double aNumericalIntegratorAbsoluteTolerance );
              // ,
              // // Optional parameters.
              // const double aCentralBodyGravitationalParameter,
@@ -82,6 +85,15 @@ public:
 
     //! Numerical integrator type.
     const std::string numericalIntegratorType;
+
+    //! Numerical integrator initial step size [s].
+    const double numericalIntegratorInitialStepSize;
+
+    //! Numerical integrator relative tolerance [-].
+    const double numericalIntegratorRelativeTolerance;
+
+    //! Numerical integrator absolute tolerance [km].
+    const double numericalIntegratorAbsoluteTolerance;
 
 //     //! Perturbed body radius [m].
 //     const double perturbedBodyRadius;

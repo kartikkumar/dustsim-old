@@ -36,7 +36,10 @@ CaseData::CaseData( const int aCaseId,
                     const double aMaximumSimulationPeriod,
                     const tudat::basic_mathematics::Vector6d anInitialStateInKeplerianElements,
                     const double aCentralBodyGravitationalParameter,
-                    const std::string& aNumericalIntegratorType )
+                    const std::string& aNumericalIntegratorType,
+                    const double aNumericalIntegratorInitialStepSize,
+                    const double aNumericalIntegratorRelativeTolerance,
+                    const double aNumericalIntegratorAbsoluteTolerance )
     : caseId( aCaseId ),
       caseName( aCaseName ),
       maximumSimulationPeriod( aMaximumSimulationPeriod ),
@@ -52,7 +55,16 @@ CaseData::CaseData( const int aCaseId,
       centralBodyGravitationalParameter(
         checkPositive( aCentralBodyGravitationalParameter, 
                        "Central body gravitational parameter [m^3 s^-2]" ) ),
-      numericalIntegratorType( aNumericalIntegratorType )
+      numericalIntegratorType( aNumericalIntegratorType ),
+      numericalIntegratorInitialStepSize( 
+        checkPositive( aNumericalIntegratorInitialStepSize, 
+                       "Numerical integrator initial step size [s]" ) ),
+      numericalIntegratorRelativeTolerance( 
+        checkPositive( aNumericalIntegratorRelativeTolerance, 
+                       "Numerical integrator relative tolerance [-]" ) ),
+      numericalIntegratorAbsoluteTolerance( 
+        checkPositive( aNumericalIntegratorAbsoluteTolerance, 
+                       "Numerical integrator absolute tolerance [-]" ) )      
 {
     if ( caseName.empty( ) )
     {
@@ -139,15 +151,8 @@ CaseData::CaseData( const int aCaseId,
 //           inclinationDistributionFullWidthHalfMaximum( 
 //             checkGreaterThan( anInclinationDistributionFullWidthHalfMaximum, 
 //                               "Inclination distribution Full-Width Half-Maximum [rad]",
-//                               NEGATIVE_ZERO ) ),
-//           numericalIntegratorInitialStepSize( checkPositive( 
-//             aNumericalIntegratorInitialStepSize, "Numerical integrator initial step size [s]" ) ),
-//           numericalIntegratorRelativeTolerance( 
-//             checkPositive( aNumericalIntegratorRelativeTolerance, 
-//                            "Numerical integrator relative tolerance [-]" ) ),
-//           numericalIntegratorAbsoluteTolerance( 
-//             checkPositive( aNumericalIntegratorAbsoluteTolerance, 
-//                            "Numerical integrator absolute tolerance [-]" ) )
+//                               NEGATIVE_ZERO ) ),),
+
 // {
 
 

@@ -1,6 +1,6 @@
 *.sublime*
 temp/
-Documention/
+Documentation/
 bin/
 build/
 lib/

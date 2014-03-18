@@ -26,21 +26,16 @@ tudat::numerical_integrators::RungeKuttaCoefficients getRungeKuttaCoefficients(
    // Declare Runge-Kutta coefficients.
     RungeKuttaCoefficients rungeKuttaCoefficients;
 
-    // Set output message.
-    std::cout << "Runge-Kutta coefficient set                               ";
-
     if ( boost::iequals( coefficientSet, "DOPRI853" ) )
     {
         rungeKuttaCoefficients = RungeKuttaCoefficients::get(
                     RungeKuttaCoefficients::rungeKutta87DormandPrince );
-        std::cout << "Dormand Prince 8(7)" << std::endl;
     }
 
     else if ( boost::iequals( coefficientSet, "RKF78" ) )
     {
         rungeKuttaCoefficients = RungeKuttaCoefficients::get(
                     RungeKuttaCoefficients::rungeKuttaFehlberg78 );
-        std::cout << "Runge-Kutta-Fehlberg 7(8)" << std::endl;
     }
 
     else
