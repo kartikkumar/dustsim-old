@@ -29,9 +29,7 @@ namespace input_output
 
 //! Data struct that contains all of the case information for a dust particle simulation.
 /*!
- * This data struct contains all of the case information for a set of dust particle simulations,
- * stored in an SQLite3 database. The data stored is, in essence, metadata for test particle
- * simulations.
+ * This data struct contains all of the case information for a dust particle simulation. The data * stored is, in essence, metadata for the simulation.
  */
 struct CaseData
 {

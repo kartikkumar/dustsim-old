@@ -28,7 +28,8 @@ DictionaryPointer getGeneralParametersDictionary( )
 
     // Add parameters.
     addEntry( dictionary, "CASE",                                  1, 0 );
-    addEntry( dictionary, "MAXIMUMSIMULATIONPERIOD",               1, 0, list_of( "TMAX" ) );  
+    addEntry( dictionary, "MAXIMUMSIMULATIONPERIOD",               1, 0, list_of( "PMAX" ) );  
+    addEntry( dictionary, "STARTEPOCH",                            0, 0, list_of( "TSTART" ) );
 
     return dictionary;  
 }
@@ -72,6 +73,10 @@ DictionaryPointer getNumericalIntegratorSettingsDictionary( )
     // Add parameters.
     addEntry( dictionary, "NUMERICALINTEGRATORTYPE",               0, 0, list_of( "INTEGRATOR" ) );
     addEntry( dictionary, "INITIALSTEPSIZE",                       0, 0, list_of( "STEPSIZE0" ) );
+    addEntry( dictionary, "MINIMUMSTEPSIZE",                       0, 0, 
+                list_of( "STEPSIZEMIN" ) );
+    addEntry( dictionary, "MAXIMUMSTEPSIZE",                       0, 0, 
+                list_of( "STEPSIZEMIN" ) );
     addEntry( dictionary, "RELATIVEERRORTOLERANCE",                0, 0, list_of( "RELTOL" ) );
     addEntry( dictionary, "ABSOLUTEERRORTOLERANCE",                0, 0, list_of( "ABSTOL" ) );
 

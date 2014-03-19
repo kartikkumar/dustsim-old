@@ -20,11 +20,11 @@
 // #include <Assist/Astrodynamics/unitConversions.h>
 #include <Assist/Basics/comparisonFunctions.h>
 
-#include "DustSim/Database/caseData.h"
+#include "DustSim/InputOutput/caseData.h"
 
 namespace dustsim
 {
-namespace database
+namespace input_output
 {
 
 using namespace assist::basics;
@@ -343,5 +343,5 @@ bool operator<( const CaseData& caseData1, const CaseData& caseData2 )
 //     return outputStream;
 // }
 
-} // namespace database
+} // namespace input_output
 } // namespace dustsim

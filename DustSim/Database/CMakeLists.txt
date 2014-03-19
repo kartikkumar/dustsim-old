@@ -6,12 +6,12 @@
 
 # Set source files.
 set(DATABASE_SOURCES
-  "${SRCROOT}${DATABASEDIR}/caseData.cpp"
+  # "${SRCROOT}${DATABASEDIR}/caseData.cpp"
 )
 
 # Set header files.
 set(DATABASE_HEADERS
-  "${SRCROOT}${DATABASEDIR}/caseData.h"
+  # "${SRCROOT}${DATABASEDIR}/caseData.h"
 )
 
 # Add static library.

@@ -161,9 +161,18 @@ if(NOT Boost_USE_STATIC_RUNTIME)
 endif()
 
 # Find Boost libraries on local system.
-find_package(Boost 1.52.0 
-             COMPONENTS thread date_time system unit_test_framework 
-                        filesystem regex serialization REQUIRED)
+find_package(Boost 1.55.0 
+             COMPONENTS 
+             chrono 
+             date_time
+             filesystem
+             regex
+             timer 
+             thread  
+             serialization
+             system 
+             unit_test_framework 
+             REQUIRED)
 
 # Include Boost directories.
 # Set CMake flag to suppress Boost warnings (platform-dependent solution).
@@ -266,8 +275,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # Set sub-directories.
-set(SUBDIRS ${ASTRODYNAMICSDIR} ${DATABASEDIR} ${INPUTOUTPUTDIR} ${MATHEMATICSDIR})
-# set(SUBDIRS ${BASICSDIR})
+set(SUBDIRS ${ASTRODYNAMICSDIR} ${INPUTOUTPUTDIR} ${MATHEMATICSDIR})
+# set(SUBDIRS ${BASICSDIR} ${DATABASEDIR})
 
 # Add sub-directories to CMake process.
 foreach(CURRENT_SUBDIR ${SUBDIRS})
@@ -278,7 +287,7 @@ endforeach(CURRENT_SUBDIR)
 add_executable(dustsim "${SRCROOT}/Applications/dustsim.cpp")
 setup_executable_target(dustsim)
 target_link_libraries(dustsim 
-                      dustsim_astrodynamics dustsim_database dustsim_input_output 
+                      dustsim_astrodynamics dustsim_input_output #dustsim_database
                       dustsim_mathematics   
                       assist_astrodynamics assist_basics assist_input_output 
                       tudat_basic_astrodynamics tudat_basic_mathematics tudat_gravitation

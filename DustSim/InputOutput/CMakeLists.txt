@@ -6,13 +6,13 @@
 
 # Set source files.
 set(INPUTOUTPUT_SOURCES
-#  "${SRCROOT}${INPUTOUTPUTDIR}/basicInputOutput.cpp"
+  "${SRCROOT}${INPUTOUTPUTDIR}/caseData.cpp"
   "${SRCROOT}${INPUTOUTPUTDIR}/dictionaries.cpp"
 )
 
 # Set header files.
 set(INPUTOUTPUT_HEADERS
-#  "${SRCROOT}${INPUTOUTPUTDIR}/basicInputOutput.h"
+  "${SRCROOT}${INPUTOUTPUTDIR}/caseData.h"
   "${SRCROOT}${INPUTOUTPUTDIR}/dictionaries.h"
 )
 

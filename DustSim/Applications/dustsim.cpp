@@ -9,10 +9,12 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <sstream>
 #include <string>
 
-#include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/timer/timer.hpp>
 
 #include <TudatCore/Astrodynamics/BasicAstrodynamics/astrodynamicsFunctions.h>
 #include <TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h>
@@ -30,13 +32,20 @@
 #include <Assist/InputOutput/basicInputOutput.h>
 
 #include "DustSim/Astrodynamics/executeSimulation.h"
-#include "DustSim/Database/caseData.h"
+#include "DustSim/InputOutput/caseData.h"
 #include "DustSim/InputOutput/dictionaries.h"
 #include "DustSim/Mathematics/basicMathematics.h"
 
 //! Execute dust particle simulations.
 int main( const int numberOfInputs, const char* inputArguments[ ] )
 {
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Start timer. Timer automatically ends when this object goes out of scope.
+    boost::timer::auto_cpu_timer timer;
+
+    ///////////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////////
 
     // Declare using-statements.
@@ -47,7 +56,7 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     using std::string;
     using std::stringstream;
 
-    using boost::make_shared;
+    using boost::shared_ptr;
 
     using namespace tudat::basic_astrodynamics;
     using namespace tudat::basic_astrodynamics::orbital_element_conversions;
@@ -64,7 +73,6 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     using namespace assist::input_output;
 
     using namespace dustsim::astrodynamics;
-    using namespace dustsim::database;
     using namespace dustsim::input_output;    
     using namespace dustsim::mathematics;        
 
@@ -110,6 +118,13 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
                 TUDAT_NAN, &convertJulianYearsToSeconds );
     cout << "Maximum simulation period                                 " 
          << convertSecondsToJulianYears( maximumSimulationPeriod ) << " yrs" << endl;   
+
+    const double startEpoch = extractParameterValue< double >(
+                parsedData->begin( ), parsedData->end( ),
+                findEntry( generalParametersDictionary, "STARTEPOCH" ),
+                0.0, &convertJulianYearsToSeconds );
+    cout << "Start epoch                                               " 
+         << convertSecondsToJulianYears( startEpoch ) << " yrs" << endl;
 
     // Check that all general parameters have been set.
     checkRequiredParameters( generalParametersDictionary );
@@ -191,6 +206,7 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
         = getNumericalIntegratorSettingsDictionary( );
 
     // Extract numerical integrator settings.
+
     const string numericalIntegratorType = extractParameterValue< string >(
                 parsedData->begin( ), parsedData->end( ),
                 findEntry( numericalIntegratorSettingsDictionary, 
@@ -209,6 +225,20 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
                 1.0e-3 * initialOrbitalPeriod );
     cout << "Initial step size                                         " 
          << numericalIntegratorInitialStepSize << " s" << endl;
+
+    const double numericalIntegratorMinimumStepSize = extractParameterValue< double >(
+                parsedData->begin( ), parsedData->end( ),
+                findEntry( numericalIntegratorSettingsDictionary, "MINIMUMSTEPSIZE" ), 
+                std::numeric_limits< double >::min( ) );
+    cout << "Minimum step size                                         " 
+         << numericalIntegratorMinimumStepSize << " s" << endl;
+
+    const double numericalIntegratorMaximumStepSize = extractParameterValue< double >(
+                parsedData->begin( ), parsedData->end( ),
+                findEntry( numericalIntegratorSettingsDictionary, "MAXIMUMSTEPSIZE" ), 
+                std::numeric_limits< double >::max( ) );
+    cout << "Maximum step size                                         " 
+         << numericalIntegratorMaximumStepSize << " s" << endl;
 
     const double numericalIntegratorRelativeTolerance = extractParameterValue< double >(
                 parsedData->begin( ), parsedData->end( ),
@@ -248,15 +278,19 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     cout << endl;
 
     // Store data in case data structure.
-    CaseDataPointer caseData = make_shared< CaseData >( 1, 
-                                                        caseName, 
-                                                        maximumSimulationPeriod,
-                                                        initialStateInKeplerianElements,
-                                                        centralBodyGravitationalParameter,
-                                                        numericalIntegratorType,
-                                                        numericalIntegratorInitialStepSize,
-                                                        numericalIntegratorRelativeTolerance,
-                                                        numericalIntegratorAbsoluteTolerance );
+    CaseDataPointer caseData = shared_ptr< CaseData >( 
+        new CaseData( 1, 
+                      caseName, 
+                      maximumSimulationPeriod,
+                      startEpoch,
+                      initialStateInKeplerianElements,
+                      centralBodyGravitationalParameter,
+                      numericalIntegratorType,
+                      numericalIntegratorInitialStepSize,
+                      numericalIntegratorInitialStepSize,
+                      numericalIntegratorInitialStepSize,
+                      numericalIntegratorRelativeTolerance,
+                      numericalIntegratorAbsoluteTolerance ) );
         
     ///////////////////////////////////////////////////////////////////////////
 
@@ -274,6 +308,11 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
 
     // Call function to execute simulation.
     executeSimulation( caseData );
+
+    cout << "Simulation finished!" << endl;
+    cout << endl;
+
+    cout << "Timing information: ";
 
     ///////////////////////////////////////////////////////////////////////////
 

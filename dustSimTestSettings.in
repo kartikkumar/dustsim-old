@@ -1,0 +1,107 @@
+#    Copyright (c) 2010-2014, Delft University of Technology
+#    Copyright (c) 2010-2014, K. Kumar (me@kartikkumar.com)
+#    Copyright (c) 2013-2014, S. Hirsh (sethhirsh@berkeley.edu)
+#    All rights reserved.
+#    See http://bit.ly/12SHPLR for license details.
+#
+#    This is an example input file for the DustSim simulator.
+#
+#    All lines preceded by the '#' character are interpreted as comments.
+#    Each line must contain only a single parameter/value pair, separated by a ':' character.
+#    Some parameters are required and some are optional. This is marked in the comments preceding 
+#    each parameter. Optional parameters have a default listed in case they are not specified by
+#    the user.
+
+
+##
+## Set general parameters.
+##
+
+# Set the name for the case.
+# The value of this parameter is interpreted as a string.
+# NB: The name should not contain spaces!
+# REQUIRED
+CASE                : test_case
+
+# Set maximum duration of simulations.
+# UNIT              : Julian yrs
+# REQUIRED
+PMAX                : 1.0
+
+# Set epoch at start of simulations.
+# UNIT              : Julian yrs
+# OPTIONAL
+# TSTART              : 0.0
+
+
+##
+## Set initial Keplerian elements for the dust particle.
+##
+
+# Set initial semi-major axis.
+# REQUIRED
+# UNIT              : km
+SMA0                : 97736.0
+
+# Set initial eccentricity.
+# REQUIRED
+# UNIT              : -
+ECC0                : 1.0e-3
+
+# Set initial inclination.
+# REQUIRED
+# UNIT              : deg
+INC0                : 0.14
+
+# Set initial argument of periapsis.
+# REQUIRED
+# UNIT              : deg
+AOP0                : 256.78
+
+# Set initial longitude of ascending node.
+# REQUIRED
+# UNIT              : deg
+LAN0                : 133.94
+
+# Set initial true anomaly.
+# REQUIRED
+# UNIT              : deg
+TAN0                : 336.19
+
+##
+## Set central gravity force model parameters.
+##
+
+# Set gravitational parameter of central body.
+# REQUIRED
+# UNIT              : m^3 s^-2
+GRAVPARAM           : 5.793966e15
+
+
+##
+## Set numerical integrator settings.
+##
+
+# Set the numerical integrator and its parameters.
+# The following parameters set the numerical integrator used for the dust particle simulations,
+# and associated settings.
+# The option for numerical integrators currently are:
+#   * DOPRI853 [Dormand-Prince 8(7)] (default)
+#   * RKF78 [Runge-Kutta-Fehlberg 7(8)]
+# The default value for the initial step size is 1/1000th of the orbital period 
+# (mu=GRAVPARAM, a=SMANOMINAL). It might be prudent to play with this starter value for different
+# simulation scenarios.
+# The default values for the minimum and maximum step sizes are set to the smallest and largest 
+# values that can be represented using the C++ "double" type.
+# The default values for the relative and absolute tolerance for error control are 10^-12 and
+# SMANOMINAL * 10^-15 (rounded base) respectively, which are common settings for RKF-type schemes. 
+# It might be important to play around with these values for different simulation scenarios and 
+# integrator types. 
+# OPTIONAL
+# UNIT                : INTEGRATOR -> -; STEPESIZE -> s, RELTOL -> -, ABSTOL -> -
+INTEGRATOR          : DOPRI853
+# STEPSIZE            : 1.0e-3 * PERIOD(GRAVPARAM, SMA0)
+# STEPSIZE            : min(double)
+# STEPSIZE            : max(double)
+# RELTOL              : 1.0e-12
+# ABSTOL              : round(SMA0 * 1.0e-15)
