@@ -10,6 +10,7 @@
 #define DUSTSIM_EXECUTESIMULATION_H
 
 #include "DustSim/InputOutput/caseData.h"
+#include "DustSim/InputOutput/outputData.h"
 
 namespace dustsim
 {
@@ -20,9 +21,11 @@ namespace astrodynamics
 /*!
  * Executes a single dust particle simulation, using case data and input values provided to the
  * function.    
- * \param caseData Struct containing all case data to run dust particle simulations.
+ * \param caseData Struct containing all case data to run dust particle simulation.
+ * \return Struct containing all the output data retrieved from dust particle simulation.
  */
-void executeSimulation( const input_output::CaseDataPointer caseData );
+boost::shared_ptr< input_output::OutputData > executeSimulation( 
+    const input_output::CaseDataPointer caseData );
 
 } // namespace astrodynamics
 } // namespace dustsim

@@ -30,7 +30,9 @@ DictionaryPointer getGeneralParametersDictionary( )
     addEntry( dictionary, "CASE",                                  1, 0 );
     addEntry( dictionary, "MAXIMUMSIMULATIONPERIOD",               1, 0, list_of( "PMAX" ) );  
     addEntry( dictionary, "STARTEPOCH",                            0, 0, list_of( "TSTART" ) );
-
+    addEntry( dictionary, "FILEOUTPUTDIRECTORY",                   0, 0, 
+                list_of( "FILEOUTPUTDIR" ) );
+    
     return dictionary;  
 }
 

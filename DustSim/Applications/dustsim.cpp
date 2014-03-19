@@ -13,6 +13,7 @@
 #include <sstream>
 #include <string>
 
+#include <boost/filesystem.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/timer/timer.hpp>
 
@@ -32,8 +33,10 @@
 #include <Assist/InputOutput/basicInputOutput.h>
 
 #include "DustSim/Astrodynamics/executeSimulation.h"
+#include "DustSim/InputOutput/basicInputOutput.h"
 #include "DustSim/InputOutput/caseData.h"
 #include "DustSim/InputOutput/dictionaries.h"
+#include "DustSim/InputOutput/outputData.h" 
 #include "DustSim/Mathematics/basicMathematics.h"
 
 //! Execute dust particle simulations.
@@ -49,6 +52,7 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     ///////////////////////////////////////////////////////////////////////////
 
     // Declare using-statements.
+    using std::cerr;
     using std::cout;
     using std::endl;
     using std::scientific;
@@ -56,6 +60,7 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     using std::string;
     using std::stringstream;
 
+    using namespace boost::filesystem;
     using boost::shared_ptr;
 
     using namespace tudat::basic_astrodynamics;
@@ -125,6 +130,13 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
                 0.0, &convertJulianYearsToSeconds );
     cout << "Start epoch                                               " 
          << convertSecondsToJulianYears( startEpoch ) << " yrs" << endl;
+
+    const string fileOutputDirectory = extractParameterValue< string >(
+                parsedData->begin( ), parsedData->end( ),
+                findEntry( generalParametersDictionary, "FILEOUTPUTDIRECTORY"), 
+                getDustSimRootPath( ) ) + "/";
+    cout << "File output directory                                     "
+         << fileOutputDirectory << endl;         
 
     // Check that all general parameters have been set.
     checkRequiredParameters( generalParametersDictionary );
@@ -306,11 +318,21 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     cout << "Starting simulation ... " << endl;
     cout << endl;
 
-    // Call function to execute simulation.
-    executeSimulation( caseData );
+    // Call function to execute simulation and save output data.
+    shared_ptr< OutputData > outputData = executeSimulation( caseData );
 
     cout << "Simulation finished!" << endl;
     cout << endl;
+
+    cout << "Writing output files ..." << endl;
+    cout << endl;
+
+    // Check if output directory exists.
+    if ( !exists( fileOutputDirectory ) )
+    {
+        cerr << "Output directory does not exist. Will be created." << endl;
+        create_directories( fileOutputDirectory );
+    }
 
     cout << "Timing information: ";
 

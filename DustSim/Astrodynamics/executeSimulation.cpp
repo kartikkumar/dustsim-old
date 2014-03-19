@@ -13,6 +13,7 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/bind.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include <TudatCore/Astrodynamics/BasicAstrodynamics/orbitalElementConversions.h>
 
@@ -29,19 +30,14 @@
 #include "DustSim/Astrodynamics/executeSimulation.h"
 #include "DustSim/Mathematics/basicMathematics.h"
 
-
 namespace dustsim
 {
 namespace astrodynamics
 {
 
 //! Execute a single dust particle simulation.
-/*!
- * Executes a single dust particle simulation, using case data and input values provided to the
- * function.    
- * \param caseData Struct containing all case data to run dust particle simulations.
- */
-void executeSimulation( const input_output::CaseDataPointer caseData )
+boost::shared_ptr< input_output::OutputData > executeSimulation( 
+    const input_output::CaseDataPointer caseData )
 {
     ///////////////////////////////////////////////////////////////////////////
 
@@ -51,6 +47,7 @@ void executeSimulation( const input_output::CaseDataPointer caseData )
     using boost::assign::list_of;
     using boost::bind;
     using boost::make_shared;
+    using boost::shared_ptr;
     
     using namespace tudat::basic_astrodynamics;
     using namespace tudat::basic_astrodynamics::orbital_element_conversions;
@@ -61,6 +58,7 @@ void executeSimulation( const input_output::CaseDataPointer caseData )
 
     using namespace assist::astrodynamics;
 
+    using namespace dustsim::input_output;
     using namespace dustsim::mathematics;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -124,6 +122,9 @@ void executeSimulation( const input_output::CaseDataPointer caseData )
     // Set step size to initial value.
     double stepSize = caseData->numericalIntegratorInitialStepSize;
 
+    // Declare output data struct to store state history.
+    shared_ptr< OutputData > output = make_shared< OutputData >( );
+
     // Execute integration until end of simulation period is reached.
     while ( integrator->getCurrentIndependentVariable( ) 
             < caseData->startEpoch + caseData->maximumSimulationPeriod )
@@ -134,11 +135,18 @@ void executeSimulation( const input_output::CaseDataPointer caseData )
         // Update step size.
         stepSize = integrator->getNextStepSize( );
 
-        // Store current state.
-         
+        // Store current state in state history.
+        output->stateHistory[ dustParticle->getCurrentTime( ) ] = dustParticle->getCurrentState( );
     }
 
     ///////////////////////////////////////////////////////////////////////////            
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Return output data struct.
+    return output;
+
+    ///////////////////////////////////////////////////////////////////////////
 }
 
 } // namespace astrodynamics

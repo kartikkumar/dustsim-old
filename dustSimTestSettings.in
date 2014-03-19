@@ -33,6 +33,12 @@ PMAX                : 1.0
 # OPTIONAL
 # TSTART              : 0.0
 
+# Set the file output directory.
+# With this parameter, the absolute path to the output directory can be specified, where the 
+# output files generated are stored.
+# The default directory for the output files is the root-directory of DustSim.
+# FILEOUTPUTDIR       : <DustSim root-directory>
+
 
 ##
 ## Set initial Keplerian elements for the dust particle.

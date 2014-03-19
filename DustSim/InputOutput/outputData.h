@@ -9,6 +9,10 @@
 #ifndef DUSTSIM_OUTPUT_DATA_H
 #define DUSTSIM_OUTPUT_DATA_H
 
+#include <Eigen/Core>
+
+#include <Assist/Basics/commonTypedefs.h>
+
 namespace dustsim
 {
 namespace input_output
@@ -22,6 +26,18 @@ struct OutputData
 {
 public:
 
+    // Set Eigen macro to correctly align class with fixed-size vectorizable types.
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
+    //! Constructor taking all case data as input.
+    OutputData( ) { }
+
+    //! State history (key=epoch, value=Cartesian state).
+    assist::basics::DoubleKeyVector6dValueMap stateHistory;
+
+    //! State history in Keplerian elements (key=epoch, value=Keplerian state).
+    assist::basics::DoubleKeyVector6dValueMap stateHistoryInKeplerianElements;
+    
 protected:
 private:
 };

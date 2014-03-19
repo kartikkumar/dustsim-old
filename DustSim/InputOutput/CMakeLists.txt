@@ -12,8 +12,10 @@ set(INPUTOUTPUT_SOURCES
 
 # Set header files.
 set(INPUTOUTPUT_HEADERS
+  "${SRCROOT}${INPUTOUTPUTDIR}/basicInputOutput.h"
   "${SRCROOT}${INPUTOUTPUTDIR}/caseData.h"
   "${SRCROOT}${INPUTOUTPUTDIR}/dictionaries.h"
+  "${SRCROOT}${INPUTOUTPUTDIR}/outputData.h"
 )
 
 # Add static library.
