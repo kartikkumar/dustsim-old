@@ -7,6 +7,7 @@
  */
 
 #include <cstdlib>
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <limits>
@@ -22,6 +23,7 @@
 #include <TudatCore/Astrodynamics/BasicAstrodynamics/unitConversions.h>
 #include <TudatCore/Mathematics/BasicMathematics/mathematicalConstants.h>
 
+#include <Tudat/InputOutput/basicInputOutput.h>
 #include <Tudat/InputOutput/dictionaryTools.h>
 #include <Tudat/InputOutput/fieldType.h>
 #include <Tudat/InputOutput/separatedParser.h>
@@ -55,6 +57,8 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     using std::cerr;
     using std::cout;
     using std::endl;
+    using std::ofstream;
+    using std::ostringstream;
     using std::scientific;
     using std::setprecision;
     using std::string;
@@ -308,13 +312,13 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
 
     ///////////////////////////////////////////////////////////////////////////
 
+    // Execute simulation and write output to file.
     cout << endl;
     cout << "****************************************************************************" << endl;
     cout << "Simulation" << endl;
     cout << "****************************************************************************" << endl;
     cout << endl;
 
-    // Execute simulation.
     cout << "Starting simulation ... " << endl;
     cout << endl;
 
@@ -333,6 +337,22 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
         cerr << "Output directory does not exist. Will be created." << endl;
         create_directories( fileOutputDirectory );
     }
+
+
+    std::ostringstream stateHistoryFilename;
+    stateHistoryFilename << caseName << "_stateHistoryInCartesianElements.csv";
+
+    // std::ofstream cartesianElementsFile;
+    // cartesianElementsFile.open( stateHistoryFilename.str( ).c_str( ) );
+    // cartesianElementsFile << "epoch,xPosition,yPosition,zPosition,"
+    //                       << "xVelocity,yVelocity,zVelocity" << endl;
+    // cartesianElementsFile << "# [s],[m],[m],[m],[m s^-1],[m s^-1],[m s^-1]" << endl;     
+    // cartesianElementsFile.close( );
+    
+    writeDataMapToTextFile(
+        outputData->stateHistory, stateHistoryFilename.str( ), fileOutputDirectory, 
+        "", std::numeric_limits< double >::digits10, std::numeric_limits< double >::digits10,
+        "," );
 
     cout << "Timing information: ";
 

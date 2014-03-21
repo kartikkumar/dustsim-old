@@ -31,8 +31,9 @@ static inline std::string getDustSimRootPath( )
     std::string filePath_( __FILE__ );
 
     // Strip filename from temporary string and return root-path string.
-    return filePath_.substr( 0, filePath_.length( ) -
-                                std::string( "InputOutput/basicInputOutput.h" ).length( ) );
+    return filePath_.substr( 
+        0, filePath_.length( ) 
+        - std::string( "DustSim/InputOutput/basicInputOutput.h" ).length( ) ) + "output";
 #endif
 }
 

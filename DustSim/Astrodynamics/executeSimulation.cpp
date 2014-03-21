@@ -27,6 +27,7 @@
 
 #include <Assist/Astrodynamics/body.h>
 
+#include "DustSim/Astrodynamics/dataUpdater.h"
 #include "DustSim/Astrodynamics/executeSimulation.h"
 #include "DustSim/Mathematics/basicMathematics.h"
 
@@ -92,9 +93,13 @@ boost::shared_ptr< input_output::OutputData > executeSimulation(
     CartesianStateDerivativeModel6d::AccelerationModelPointerVector accelerationList 
         = list_of( centralBodyGravity );
 
+    // Construct data updater that updates the state and associated epoch of the dust particle.
+    DataUpdaterPointer dataUpdater = make_shared< DataUpdater >( dustParticle );
+
     CartesianStateDerivativeModel6dPointer stateDerivative
             = make_shared< CartesianStateDerivativeModel6d >(
-                accelerationList, &updateNothing< double, Vector6d > );
+                accelerationList, 
+                bind( &DataUpdater::updateEpochAndState, dataUpdater, _1, _2 ) );
 
     ///////////////////////////////////////////////////////////////////////////    
 
@@ -125,10 +130,16 @@ boost::shared_ptr< input_output::OutputData > executeSimulation(
     // Declare output data struct to store state history.
     shared_ptr< OutputData > output = make_shared< OutputData >( );
 
+    // Store initial state in state history.
+    output->stateHistory[ dustParticle->getCurrentTime( ) ] = dustParticle->getCurrentState( );    
+
     // Execute integration until end of simulation period is reached.
-    while ( integrator->getCurrentIndependentVariable( ) 
-            < caseData->startEpoch + caseData->maximumSimulationPeriod )
-    {
+    // while ( integrator->getCurrentIndependentVariable( ) 
+    //         < caseData->startEpoch + caseData->maximumSimulationPeriod )
+    // {
+    int i = 0;
+    while ( i < 1000 )
+    {    
         // Execute single integration step.
         integrator->performIntegrationStep( stepSize );
 
@@ -136,7 +147,10 @@ boost::shared_ptr< input_output::OutputData > executeSimulation(
         stepSize = integrator->getNextStepSize( );
 
         // Store current state in state history.
-        output->stateHistory[ dustParticle->getCurrentTime( ) ] = dustParticle->getCurrentState( );
+        output->stateHistory[ dustParticle->getCurrentTime( ) ] 
+            = dustParticle->getCurrentState( );    
+
+        i++;
     }
 
     ///////////////////////////////////////////////////////////////////////////            
