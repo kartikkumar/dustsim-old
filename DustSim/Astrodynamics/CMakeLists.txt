@@ -11,7 +11,7 @@ set(ASTRODYNAMICS_SOURCES
 
 # Set header files.
 set(ASTRODYNAMICS_HEADERS
-    "${SRCROOT}${ASTRODYNAMICSDIR}/dataUpdater.h"
+    "${SRCROOT}${ASTRODYNAMICSDIR}/body.h"
     "${SRCROOT}${ASTRODYNAMICSDIR}/executeSimulation.h"
 )
 

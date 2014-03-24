@@ -354,6 +354,19 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
         "", std::numeric_limits< double >::digits10, std::numeric_limits< double >::digits10,
         "," );
 
+    std::ostringstream stateHistoryInKeplerianElementsFilename;
+    stateHistoryInKeplerianElementsFilename 
+        << caseName << "_stateHistoryInKeplerianElements.csv";
+    
+    writeDataMapToTextFile(
+        outputData->stateHistoryInKeplerianElements, 
+        stateHistoryInKeplerianElementsFilename.str( ), 
+        fileOutputDirectory, 
+        "", 
+        std::numeric_limits< double >::digits10, 
+        std::numeric_limits< double >::digits10,
+        "," );    
+
     cout << "Timing information: ";
 
     ///////////////////////////////////////////////////////////////////////////
