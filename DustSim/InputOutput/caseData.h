@@ -45,6 +45,8 @@ public:
              const double aStartEpoch,
              const tudat::basic_mathematics::Vector6d anInitialStateInKeplerianElements,
              const double aCentralBodyGravitationalParameter,
+             const double aCentralBodyEquatorialRadius, 
+             const double aCentralBodyJ2GravityCoefficient,
              const std::string& aNumericalIntegratorType,
              const double aNumericalIntegratorInitialStepSize,
              const double aNumericalIntegratorMinimumStepSize,
@@ -86,6 +88,12 @@ public:
 
     //! Central body gravitational parameter [m^3 s^-2].
     const double centralBodyGravitationalParameter;
+
+    //! Central body equatorial radius [m].
+    const double centralBodyEquatorialRadius;
+
+    //! Central body J2 gravity field coefficient.
+    const double centralBodyJ2GravityCoefficient;
 
     //! Numerical integrator type.
     const std::string numericalIntegratorType;

@@ -82,6 +82,8 @@ TAN0                : 336.19
 # REQUIRED
 # UNIT              : m^3 s^-2
 GRAVPARAM           : 5.793966e15
+EQRAD		    : 2000.0
+J2		    : 0.5
 
 
 ##

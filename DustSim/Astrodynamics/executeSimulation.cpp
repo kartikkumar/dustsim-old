@@ -19,6 +19,7 @@
 
 #include <Tudat/Astrodynamics/BasicAstrodynamics/accelerationModel.h>
 #include <Tudat/Astrodynamics/Gravitation/centralGravityModel.h>
+#include <Tudat/Astrodynamics/Gravitation/centralJ2GravityModel.h>
 #include <Tudat/Astrodynamics/StateDerivativeModels/cartesianStateDerivativeModel.h>
 #include <Tudat/Astrodynamics/StateDerivativeModels/compositeStateDerivativeModel.h>
 #include <Tudat/Mathematics/BasicMathematics/linearAlgebraTypes.h>
@@ -81,14 +82,16 @@ boost::shared_ptr< input_output::OutputData > executeSimulation(
     // Set up dynamics.
 
     // Set acceleration models for dust particle.
-    AccelerationModel3dPointer centralBodyGravity
-        = make_shared< CentralGravitationalAccelerationModel3d >(
+    AccelerationModel3dPointer centralJ2Gravity
+        = make_shared< CentralJ2GravitationalAccelerationModel >(
             bind( &Body::getCurrentPosition, dustParticle ),
-            caseData->centralBodyGravitationalParameter );
+            caseData->centralBodyGravitationalParameter, 
+            caseData->centralBodyEquatorialRadius , 
+            caseData->centralBodyJ2GravityCoefficient );
 
     // Create lists of acceleration models to provide to state derivative models.
     CartesianStateDerivativeModel6d::AccelerationModelPointerVector accelerationList 
-        = list_of( centralBodyGravity );
+        = list_of( centralJ2Gravity );
 
     CartesianStateDerivativeModel6dPointer stateDerivative
         = make_shared< CartesianStateDerivativeModel6d >(

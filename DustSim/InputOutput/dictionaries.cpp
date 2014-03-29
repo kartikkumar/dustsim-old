@@ -61,6 +61,8 @@ DictionaryPointer getGravityForceModelDictionary( )
 
     // Add parameters.
     addEntry( dictionary, "CENTRALBODYGRAVITATIONALPARAMETER",     1, 0, list_of( "GRAVPARAM" ) );
+    addEntry( dictionary, "CENTRALBODYEQUATORIALRADIUS",           1, 0, list_of( "EQRAD" ) );
+    addEntry( dictionary, "CENTRALBODYJ2GRAVITYCOEFFICIENT",       1, 0, list_of( "J2" ) );
 
     return dictionary;  
 }

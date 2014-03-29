@@ -212,7 +212,21 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
                 parsedData->begin( ), parsedData->end( ),
                 findEntry( gravityForceModelDictionary, "CENTRALBODYGRAVITATIONALPARAMETER" ) );
     cout << "Central body gravitational parameter                      " 
-         << centralBodyGravitationalParameter << " m^3 s^-2" << endl;  
+         << centralBodyGravitationalParameter << " m^3 s^-2" << endl;
+
+    // Extract central body equatorial radius.
+    const double centralBodyEquatorialRadius = extractParameterValue< double >(
+                parsedData->begin( ), parsedData->end( ),
+                findEntry( gravityForceModelDictionary, "CENTRALBODYEQUATORIALRADIUS" ) );
+    cout << "Central body equatorial radius                            " 
+         << centralBodyEquatorialRadius << " m" << endl; 
+
+    // Extract central body J2 gravity coefficient.
+    const double centralBodyJ2GravityCoefficient = extractParameterValue< double >(
+                parsedData->begin( ), parsedData->end( ),
+                findEntry( gravityForceModelDictionary, "CENTRALBODYJ2GRAVITYCOEFFICIENT" ) );
+    cout << "Central body J2 gravity coefficient                       " 
+         << centralBodyGravitationalParameter << endl; 
 
     // Check that all gravity force model parameters have been set.
     checkRequiredParameters( gravityForceModelDictionary );
@@ -301,6 +315,8 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
                       startEpoch,
                       initialStateInKeplerianElements,
                       centralBodyGravitationalParameter,
+                      centralBodyEquatorialRadius,
+                      centralBodyJ2GravityCoefficient,
                       numericalIntegratorType,
                       numericalIntegratorInitialStepSize,
                       numericalIntegratorInitialStepSize,
