@@ -22,6 +22,7 @@
 #include <Tudat/Astrodynamics/StateDerivativeModels/cartesianStateDerivativeModel.h>
 #include <Tudat/Astrodynamics/StateDerivativeModels/compositeStateDerivativeModel.h>
 #include <Tudat/Mathematics/BasicMathematics/linearAlgebraTypes.h>
+#include <Tudat/Mathematics/Interpolators/lagrangeInterpolator.h>
 #include <Tudat/Mathematics/NumericalIntegrators/rungeKuttaCoefficients.h>
 #include <Tudat/Mathematics/NumericalIntegrators/rungeKuttaVariableStepSizeIntegrator.h>
 
