@@ -35,10 +35,10 @@
 #include <Assist/InputOutput/basicInputOutput.h>
 
 #include "DustSim/Astrodynamics/executeSimulation.h"
-#include "DustSim/InputOutput/basicInputOutput.h"
 #include "DustSim/InputOutput/caseData.h"
 #include "DustSim/InputOutput/dictionaries.h"
 #include "DustSim/InputOutput/outputData.h" 
+#include "DustSim/InputOutput/rootPath.h" 
 #include "DustSim/Mathematics/basicMathematics.h"
 
 //! Execute dust particle simulations.
