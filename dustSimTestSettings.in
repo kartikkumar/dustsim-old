@@ -26,7 +26,7 @@ CASE                : test_case
 # Set maximum duration of simulations.
 # UNIT              : Julian yrs
 # REQUIRED
-PMAX                : 1.0
+PMAX                : 10.0
 
 # Set epoch at start of simulations.
 # UNIT              : Julian yrs
@@ -37,7 +37,7 @@ PMAX                : 1.0
 # With this parameter, the absolute path to the output directory can be specified, where the 
 # output files generated are stored.
 # The default directory for the output files is the root-directory of DustSim.
-# FILEOUTPUTDIR       : <DustSim root-directory>
+# FILEOUTPUTDIR       : /Users/sethmichaelhirsh/Desktop/Tudat/tudatBundle/tudatApplications/dustsimData/
 
 
 ##
@@ -47,17 +47,17 @@ PMAX                : 1.0
 # Set initial semi-major axis.
 # REQUIRED
 # UNIT              : km
-SMA0                : 97736.0
+SMA0                : 6741507.754
 
 # Set initial eccentricity.
 # REQUIRED
 # UNIT              : -
-ECC0                : 1.0e-3
+ECC0                : 0.0005
 
 # Set initial inclination.
 # REQUIRED
 # UNIT              : deg
-INC0                : 0.14
+INC0                : 10.0
 
 # Set initial argument of periapsis.
 # REQUIRED
@@ -67,12 +67,12 @@ AOP0                : 256.78
 # Set initial longitude of ascending node.
 # REQUIRED
 # UNIT              : deg
-LAN0                : 133.94
+LAN0                : 30.0
 
 # Set initial true anomaly.
 # REQUIRED
 # UNIT              : deg
-TAN0                : 336.19
+TAN0                : 0.0
 
 ##
 ## Set central gravity force model parameters.
@@ -81,9 +81,9 @@ TAN0                : 336.19
 # Set gravitational parameter of central body.
 # REQUIRED
 # UNIT              : m^3 s^-2
-GRAVPARAM           : 5.793966e15
-EQRAD		    : 2000.0
-J2		    : 0.5
+GRAVPARAM           : 3.986004418e14
+EQRAD		    : 6378.137e3
+J2		    : 1082.61e-6
 
 
 ##
