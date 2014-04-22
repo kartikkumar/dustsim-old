@@ -289,7 +289,7 @@ setup_executable_target(dustsim)
 target_link_libraries(dustsim 
                       dustsim_astrodynamics dustsim_input_output #dustsim_database
                       dustsim_mathematics   
-                      assist_astrodynamics assist_basics assist_input_output 
+                      assist_input_output 
                       tudat_basic_astrodynamics tudat_basic_mathematics tudat_gravitation
                       tudat_input_output tudat_numerical_integrators
                       tudat_state_derivative_models  
