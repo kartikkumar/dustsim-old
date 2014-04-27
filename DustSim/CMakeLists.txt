@@ -291,7 +291,7 @@ target_link_libraries(dustsim
                       dustsim_mathematics   
                       assist_input_output 
                       tudat_basic_astrodynamics tudat_basic_mathematics tudat_gravitation
-                      tudat_input_output tudat_numerical_integrators
+                      tudat_input_output tudat_numerical_integrators tudat_electro_magnetism
                       tudat_state_derivative_models  
                       ${TUDAT_CORE_LIBRARIES} 
                       ${SQLITECPP_LIBRARY} 

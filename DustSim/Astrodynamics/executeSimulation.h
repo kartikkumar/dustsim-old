@@ -17,6 +17,21 @@ namespace dustsim
 namespace astrodynamics
 {
 
+// Get position of source of radiation pressure [m].
+Eigen::Vector3d getSourcePosition( );
+
+// Get position of accelerated body [m].
+Eigen::Vector3d getAcceleratedBodyPosition( );
+
+// Get radiation pressure at location of acceleration body [N/m^2].
+double getRadiationPressure( );
+
+// Get vector from accelerated body to source [m].
+Eigen::Vector3d getVectorToSource( );
+
+
+
+
 //! Execute a single dust particle simulation.
 /*!
  * Executes a single dust particle simulation, using case data and input values provided to the
