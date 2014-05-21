@@ -22,18 +22,68 @@
 #include <Tudat/Astrodynamics/StateDerivativeModels/cartesianStateDerivativeModel.h>
 #include <Tudat/Astrodynamics/StateDerivativeModels/compositeStateDerivativeModel.h>
 #include <Tudat/Mathematics/BasicMathematics/linearAlgebraTypes.h>
-#include <Tudat/Mathematics/Interpolators/lagrangeInterpolator.h>
+//#include <Tudat/Mathematics/Interpolators/lagrangeInterpolator.h>
 #include <Tudat/Mathematics/NumericalIntegrators/rungeKuttaCoefficients.h>
 #include <Tudat/Mathematics/NumericalIntegrators/rungeKuttaVariableStepSizeIntegrator.h>
+#include "Tudat/Astrodynamics/BasicAstrodynamics/accelerationModel.h"
 
 #include "DustSim/Astrodynamics/body.h"
 #include "DustSim/Astrodynamics/executeSimulation.h"
 #include "DustSim/Mathematics/basicMathematics.h"
 
+#include "Tudat/Astrodynamics/ElectroMagnetism/isotropicPoyntingRobertsonDragAcceleration.h"
+
 namespace dustsim
 {
 namespace astrodynamics
 {
+
+    // Set radiation pressure at 1 AU [N/m^2].
+    const double radiationPressureAtOneAU = 4.56e-6;
+
+    // Set 1 AU in metres [m].
+    const double astronomicalUnitInMeters = 1.49598e11;
+
+    // Set position of source of radiation pressure at origin [m].
+    static Eigen::Vector3d sourcePosition = Eigen::Vector3d::Zero( );
+
+    // Get source position [m].
+    Eigen::Vector3d getSourcePosition( ) { return sourcePosition; }
+
+
+    // Set position of accelerated body [m].
+    static Eigen::Vector3d acceleratedBodyPosition 
+    = Eigen::Vector3d( -astronomicalUnitInMeters, 0.0, 0.0 );
+
+    // Get position of accelerated body [m].
+    Eigen::Vector3d getAcceleratedBodyPosition( ) { return acceleratedBodyPosition; }
+
+    // Get vector from accelerated body to source [m].
+    Eigen::Vector3d getVectorToSource( ) 
+    { 
+    return getSourcePosition( ) - getAcceleratedBodyPosition( ); 
+    }
+
+    // Set radiation pressure at location of acceleration body [N/m^2].
+    static double radiationPressure = radiationPressureAtOneAU
+    * astronomicalUnitInMeters * astronomicalUnitInMeters / getVectorToSource( ).squaredNorm( );
+
+    // Get radiation pressure at location of acceleration body [N/m^2].
+    double getRadiationPressure( ) { return radiationPressure; }
+
+    // Set radiation pressure coefficient.
+    static double radiationPressureCoefficient = 1.0 + 0.3;
+
+    // Set area subject to radiation pressure [m^2].
+    static double areaSubjectToRadiationPressure = 2.0;
+
+    // Set mass of accelerated body [kg].
+    static double massOfAcceleratedBody = 4.0;
+
+    // Set radiation pressure force on accelerated body [N]
+    static double radiationPressureForce = 10.0;
+
+
 
 //! Execute a single dust particle simulation.
 boost::shared_ptr< input_output::OutputData > executeSimulation( 
@@ -86,9 +136,15 @@ boost::shared_ptr< input_output::OutputData > executeSimulation(
             bind( &Body::getCurrentPosition, dustParticle ),
             caseData->centralBodyGravitationalParameter );
 
+    boost::shared_ptr< tudat::electro_magnetism::IsotropicPoyntingRobertsonDrag > poyntingRobertsonDragModel
+        = make_shared< tudat::electro_magnetism::IsotropicPoyntingRobertsonDrag >(
+            &getSourcePosition, bind( &Body::getCurrentPosition, dustParticle ),
+            bind( &Body::getCurrentVelocity, dustParticle ),
+            radiationPressureForce, massOfAcceleratedBody);
+
     // Create lists of acceleration models to provide to state derivative models.
     CartesianStateDerivativeModel6d::AccelerationModelPointerVector accelerationList 
-        = list_of( centralBodyGravity );
+        = list_of( centralBodyGravity ) ( poyntingRobertsonDragModel );
 
     CartesianStateDerivativeModel6dPointer stateDerivative
         = make_shared< CartesianStateDerivativeModel6d >(
