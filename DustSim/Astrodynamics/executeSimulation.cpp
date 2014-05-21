@@ -145,7 +145,7 @@ boost::shared_ptr< input_output::OutputData > executeSimulation(
 
     // Create lists of acceleration models to provide to state derivative models.
     CartesianStateDerivativeModel6d::AccelerationModelPointerVector accelerationList 
-        = list_of( centralBodyGravity );
+        = list_of( centralBodyGravity )( radiationPressureModel );
 
     CartesianStateDerivativeModel6dPointer stateDerivative
         = make_shared< CartesianStateDerivativeModel6d >(
