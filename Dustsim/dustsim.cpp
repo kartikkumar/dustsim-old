@@ -7,6 +7,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 #include <boost/algorithm/string/predicate.hpp>
@@ -22,96 +23,105 @@
 // #include "Dustsim/ApplicationModes/randomWalkSimulator.h" 
 // #include "Dustsim/ApplicationModes/testParticleDatabaseGenerator.h"
 // #include "Dustsim/ApplicationModes/testParticleSimulator.h"
-// #include "Dustsim/InputOutput/dictionaries.h"
+#include "Dustsim/InputOutput/dictionaries.h"
 
 //! Execute Dustsim.
 int main( const int numberOfInputs, const char* inputArguments[ ] )
 {
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
-    // // Declare using-statements.
-    // using std::cout;
-    // using std::endl;
-    // using std::string;
+    // Declare using-statements.
 
-    // using boost::iequals;
+    using std::cout;
+    using std::endl;
+    using std::runtime_error;
+    using std::string;
 
-    // using namespace assist::input_output;
+    using boost::iequals;
 
-    // using namespace tudat::input_output;
-    // using namespace tudat::input_output::dictionary;
-    // using namespace tudat::input_output::field_types::general;
-    // using namespace tudat::input_output::parsed_data_vector_utilities;
+    using namespace assist::input_output;
+
+    using namespace tudat::input_output;
+    using namespace tudat::input_output::dictionary;
+    using namespace tudat::input_output::field_types::general;
+    using namespace tudat::input_output::parsed_data_vector_utilities;
 
     // using namespace dustsim::application_modes;
-    // using namespace dustsim::input_output;
+    using namespace dustsim::input_output;
 
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
-    // // Set up input deck.
+    // Set up input deck.
 
-    // // Check number of input parameters is correct (the numberOfInputs variable includes the
-    // // application itself, so one is subtracted from this number).
-    // checkNumberOfInputArguments( numberOfInputs - 1 );
+    // Check number of input parameters is correct (the numberOfInputs variable includes the
+    // application itself, so one is subtracted from this number).
+    checkNumberOfInputArguments( numberOfInputs - 1 );
 
-    // // Read and filter input stream (this can't be declared const because the parser's parse
-    // // function is not const-correct at the moment).
-    // string filteredInput = readAndFilterInputFile( inputArguments[ 1 ] );
+    // Read and filter input stream (this can't be declared const because the parser's parse
+    // function is not const-correct at the moment).
+    string filteredInput = readAndFilterInputFile( inputArguments[ 1 ] );
 
-    // // Declare a separated parser.
-    // SeparatedParser parser( string( ": " ), 2, parameterName, parameterValue );
+    // Declare a separated parser.
+    SeparatedParser parser( string( ": " ), 2, parameterName, parameterValue );
 
-    // // Parse filtered data.
-    // const ParsedDataVectorPtr parsedData = parser.parse( filteredInput );
+    // Parse filtered data.
+    const ParsedDataVectorPtr parsedData = parser.parse( filteredInput );
 
-    // // Get general parameters dictionary.
-    // DictionaryPointer dictionary = getGeneralParametersDictionary( );
+    // Get general parameters dictionary.
+    DictionaryPointer dictionary = getGeneralParametersDictionary( );
 
-    // // Extract application mode.
-    // const string applicationMode = extractParameterValue< string >(
-    //             parsedData->begin( ), parsedData->end( ), findEntry( dictionary, "MODE" ) );
+    // Extract application mode.
+    const string applicationMode = extractParameterValue< string >(
+                parsedData->begin( ), parsedData->end( ), findEntry( dictionary, "MODE" ) );
 
-    // const string databasePath = extractParameterValue< string >(
-    //             parsedData->begin( ), parsedData->end( ), 
-    //             findEntry( dictionary, "DATABASEPATH" ) );
+    ///////////////////////////////////////////////////////////////////////////
 
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
-    // ///////////////////////////////////////////////////////////////////////////
+    // Call selected application mode.
+    cout << endl;
+    cout << "----------------------------------------------------------" << endl;
+    cout << endl;
+    cout << "                         DUSTSIM                          " << endl;
+    cout << "                          2.0.0                           " << endl;
+    cout << endl;
+    cout << " Copyright (c) 2010-2014, Delft University of Technology  " << endl;
+    cout << " Copyright (c) 2010-2014, K. Kumar (me@kartikkumar.com)   " << endl;
+    cout << "Copyright (c) 2013-2014, S. Hirsh (sethhirsh@berkeley.edu)" << endl;
+    cout << endl;
+    cout << "----------------------------------------------------------" << endl;
 
-    // // Call selected application mode.
-    // cout << endl;
-    // cout << "Application mode                                          ";
+    cout << endl;
+    cout << "Application mode                                          ";
 
-    // if ( iequals( applicationMode, "TPDB" ) )
-    // {
-    //     cout << "TEST PARTICLE DATABASE GENERATOR" << endl;
-    //     executeTestParticleDatabaseGenerator( databasePath, parsedData );
-    // }    
+    if ( iequals( applicationMode, "SPS" ) )
+    {
+        cout << "SINGLE PARTICLE SIMULATOR" << endl;
+        // executeSingleParticleSimulator( databasePath, parsedData );
+    }    
 
-    // else if ( iequals( applicationMode, "TPSIM" ) )
-    // {
-    //     cout << "TEST PARTICLE SIMULATOR" << endl;
-    //     executeTestParticleSimulator( databasePath, parsedData );             
-    // } 
+    else if ( iequals( applicationMode, "BPS" ) )
+    {
+        cout << "BULK PARTICLE SIMULATOR" << endl;
+        // executeBulkParticleSimulator( databasePath, parsedData );
+    } 
 
-    // else if ( iequals( applicationMode, "RWDB" ) )
-    // {
-    //     cout << "RANDOM WALK DATABASE GENERATOR" << endl;
-    //     executeRandomWalkDatabaseGenerator( databasePath, parsedData );        
-    // }    
+    else if ( iequals( applicationMode, "BPDG" ) )
+    {
+        cout << "BULK PARTICLE DATABASE GENERATOR" << endl;
+        // executeBulkParticleDatabaseGenerator( databasePath, parsedData );        
+    }    
 
-    // else if ( iequals( applicationMode, "RWSIM" ) )
-    // {
-    //     cout << "RANDOM WALK SIMULATOR" << endl;
-    //     executeRandomWalkSimulator( databasePath, parsedData );             
-    // }    
+    else
+    {
+        throw runtime_error( "ERROR: Application mode not recognized!" );             
+    }    
 
-    // cout << endl;
+    cout << endl;
 
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
 

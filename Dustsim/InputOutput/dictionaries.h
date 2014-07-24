@@ -18,9 +18,8 @@ namespace input_output
 
 //! Get dictionary of general parameters.
 /*!
- * Returns dictionary of general parameters for dust particle simulator application.
- * \return Shared-pointer to new dictionary with general parameters for dust particle simulator 
- *          application.
+ * Returns dictionary of general parameters for dustsim.
+ * \return Shared-pointer to new dictionary with general parameters for dustsim.
  */
 tudat::input_output::dictionary::DictionaryPointer getGeneralParametersDictionary( );
 
