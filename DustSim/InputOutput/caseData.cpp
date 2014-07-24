@@ -20,7 +20,7 @@
 // #include <Assist/Astrodynamics/unitConversions.h>
 #include <Assist/Basics/comparisonFunctions.h>
 
-#include "DustSim/InputOutput/caseData.h"
+#include "Dustsim/InputOutput/caseData.h"
 
 namespace dustsim
 {

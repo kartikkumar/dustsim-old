@@ -6,13 +6,13 @@
 
 # Set source files.
 set(ASTRODYNAMICS_SOURCES
-    "${SRCROOT}${ASTRODYNAMICSDIR}/executeSimulation.cpp"
+    "${SOURCE_ROOT}${ASTRODYNAMICS_DIR}/executeSimulation.cpp"
 )
 
 # Set header files.
 set(ASTRODYNAMICS_HEADERS
-    "${SRCROOT}${ASTRODYNAMICSDIR}/body.h"
-    "${SRCROOT}${ASTRODYNAMICSDIR}/executeSimulation.h"
+    "${SOURCE_ROOT}${ASTRODYNAMICS_DIR}/body.h"
+    "${SOURCE_ROOT}${ASTRODYNAMICS_DIR}/executeSimulation.h"
 )
 
 # Add static library.

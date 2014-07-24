@@ -9,8 +9,8 @@
 #ifndef DUSTSIM_EXECUTESIMULATION_H
 #define DUSTSIM_EXECUTESIMULATION_H
 
-#include "DustSim/InputOutput/caseData.h"
-#include "DustSim/InputOutput/outputData.h"
+#include "Dustsim/InputOutput/caseData.h"
+#include "Dustsim/InputOutput/outputData.h"
 
 namespace dustsim
 {

@@ -6,15 +6,15 @@
 
 # Set source files.
 set(INPUTOUTPUT_SOURCES
-  "${SRCROOT}${INPUTOUTPUTDIR}/caseData.cpp"
-  "${SRCROOT}${INPUTOUTPUTDIR}/dictionaries.cpp"
+  "${SOURCE_ROOT}${INPUTOUTPUT_DIR}/caseData.cpp"
+  "${SOURCE_ROOT}${INPUTOUTPUT_DIR}/dictionaries.cpp"
 )
 
 # Set header files.
 set(INPUTOUTPUT_HEADERS
-  "${SRCROOT}${INPUTOUTPUTDIR}/caseData.h"
-  "${SRCROOT}${INPUTOUTPUTDIR}/dictionaries.h"
-  "${SRCROOT}${INPUTOUTPUTDIR}/outputData.h"
+  "${SOURCE_ROOT}${INPUTOUTPUT_DIR}/caseData.h"
+  "${SOURCE_ROOT}${INPUTOUTPUT_DIR}/dictionaries.h"
+  "${SOURCE_ROOT}${INPUTOUTPUT_DIR}/outputData.h"
 )
 
 # Add static library.
@@ -23,7 +23,7 @@ setup_library_target(dustsim_input_output)
 
 ## Add unit tests.
 #add_executable(test_BasicInputOutput 
-#               "${SRCROOT}${INPUTOUTPUTDIR}/UnitTests/unitTestBasicInputOutput.cpp")
-#setup_unit_test_target(test_BasicInputOutput "${SRCROOT}${INPUTOUTPUTDIR}")
+#               "${SOURCE_ROOT}${INPUTOUTPUT_DIR}/UnitTests/unitTestBasicInputOutput.cpp")
+#setup_unit_test_target(test_BasicInputOutput "${SOURCE_ROOT}${INPUTOUTPUT_DIR}")
 #target_link_libraries(test_BasicInputOutput dustsim_input_output 
 #                      dustsim_database ${TUDAT_CORE_LIBRARIES} ${Boost_LIBRARIES})

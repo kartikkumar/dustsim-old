@@ -6,12 +6,12 @@
 
 # Set source files.
 set(MATHEMATICS_SOURCES
-  "${SRCROOT}${MATHEMATICSDIR}/basicMathematics.cpp"
+  "${SOURCE_ROOT}${MATHEMATICS_DIR}/basicMathematics.cpp"
 )
 
 # Set header files.
 set(MATHEMATICS_HEADERS
-  "${SRCROOT}${MATHEMATICSDIR}/basicMathematics.h"
+  "${SOURCE_ROOT}${MATHEMATICS_DIR}/basicMathematics.h"
 )
 
 # Add static library.
@@ -20,7 +20,7 @@ setup_library_target(dustsim_mathematics)
 
 ## Add unit tests.
 #add_executable(test_BasicInputOutput 
-#               "${SRCROOT}${MATHEMATICSDIR}/UnitTests/unitTestBasicInputOutput.cpp")
-#setup_unit_test_target(test_BasicInputOutput "${SRCROOT}${MATHEMATICSDIR}")
+#               "${SOURCE_ROOT}${MATHEMATICS_DIR}/UnitTests/unitTestBasicInputOutput.cpp")
+#setup_unit_test_target(test_BasicInputOutput "${SOURCE_ROOT}${MATHEMATICS_DIR}")
 #target_link_libraries(test_BasicInputOutput dustsim_input_output 
 #                      dustsim_database ${TUDAT_CORE_LIBRARIES} ${Boost_LIBRARIES})

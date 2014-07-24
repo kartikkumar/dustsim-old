@@ -15,13 +15,13 @@ namespace dustsim
 namespace input_output
 {
 
-//! Get root-path for DustSim application.
+//! Get root-path for Dustsim application.
 /*!
- * Returns root-path corresponding with root-directory of DustSim as a string with
+ * Returns root-path corresponding with root-directory of Dustsim as a string with
  * trailing slash included.
- * \return DustSim root-path.
+ * \return Dustsim root-path.
  */
-static inline std::string getDustSimRootPath( )
+static inline std::string getDustsimRootPath( )
 {
 #ifdef DUSTSIM_CUSTOM_ROOT_PATH
     return std::string( DUSTSIM_CUSTOM_ROOT_PATH );
@@ -33,7 +33,7 @@ static inline std::string getDustSimRootPath( )
     // Strip filename from temporary string and return root-path string.
     return filePath_.substr( 
         0, filePath_.length( ) 
-        - std::string( "DustSim/InputOutput/rootPath.h" ).length( ) ) + "output";
+        - std::string( "Dustsim/InputOutput/rootPath.h" ).length( ) ) + "output";
 #endif
 }
 

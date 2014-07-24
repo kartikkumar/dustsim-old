@@ -34,12 +34,12 @@
 #include <Assist/Astrodynamics/unitConversions.h>
 #include <Assist/InputOutput/basicInputOutput.h>
 
-#include "DustSim/Astrodynamics/executeSimulation.h"
-#include "DustSim/InputOutput/caseData.h"
-#include "DustSim/InputOutput/dictionaries.h"
-#include "DustSim/InputOutput/outputData.h" 
-#include "DustSim/InputOutput/rootPath.h" 
-#include "DustSim/Mathematics/basicMathematics.h"
+#include "Dustsim/Astrodynamics/executeSimulation.h"
+#include "Dustsim/InputOutput/caseData.h"
+#include "Dustsim/InputOutput/dictionaries.h"
+#include "Dustsim/InputOutput/outputData.h" 
+#include "Dustsim/InputOutput/rootPath.h" 
+#include "Dustsim/Mathematics/basicMathematics.h"
 
 //! Execute dust particle simulations.
 int main( const int numberOfInputs, const char* inputArguments[ ] )
@@ -138,7 +138,7 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     const string fileOutputDirectory = extractParameterValue< string >(
                 parsedData->begin( ), parsedData->end( ),
                 findEntry( generalParametersDictionary, "FILEOUTPUTDIRECTORY"), 
-                getDustSimRootPath( ) ) + "/";
+                getDustsimRootPath( ) ) + "/";
     cout << "File output directory                                     "
          << fileOutputDirectory << endl;         
 

@@ -26,9 +26,9 @@
 #include <Tudat/Mathematics/NumericalIntegrators/rungeKuttaCoefficients.h>
 #include <Tudat/Mathematics/NumericalIntegrators/rungeKuttaVariableStepSizeIntegrator.h>
 
-#include "DustSim/Astrodynamics/body.h"
-#include "DustSim/Astrodynamics/executeSimulation.h"
-#include "DustSim/Mathematics/basicMathematics.h"
+#include "Dustsim/Astrodynamics/body.h"
+#include "Dustsim/Astrodynamics/executeSimulation.h"
+#include "Dustsim/Mathematics/basicMathematics.h"
 
 namespace dustsim
 {

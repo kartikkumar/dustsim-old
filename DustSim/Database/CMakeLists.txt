@@ -6,20 +6,20 @@
 
 # Set source files.
 set(DATABASE_SOURCES
-  # "${SRCROOT}${DATABASEDIR}/caseData.cpp"
+  # "${SOURCE_ROOT}${DATABASE_DIR}/caseData.cpp"
 )
 
 # Set header files.
 set(DATABASE_HEADERS
-  # "${SRCROOT}${DATABASEDIR}/caseData.h"
+  # "${SOURCE_ROOT}${DATABASE_DIR}/caseData.h"
 )
 
 # Add static library.
-add_library(dustsim_database STATIC ${DATABASE_SOURCES} ${DATABASE_HEADERS})
-setup_library_target(dustsim_database)
+# add_library(dustsim_database STATIC ${DATABASE_SOURCES} ${DATABASE_HEADERS})
+# setup_library_target(dustsim_database)
 
 # Add unit tests.
-# add_executable(test_Input "${SRCROOT}${DATABASEDIR}/UnitTests/unitTestInput.cpp")
+# add_executable(test_Input "${SOURCE_ROOT}${DATABASE_DIR}/UnitTests/unitTestInput.cpp")
 # setup_unit_test_target(test_Input)
 # target_link_libraries(test_Input 
 #                       dustsim_database 

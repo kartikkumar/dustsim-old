@@ -11,7 +11,7 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 
-#include "DustSim/Mathematics/basicMathematics.h"
+#include "Dustsim/Mathematics/basicMathematics.h"
 
 namespace dustsim
 {

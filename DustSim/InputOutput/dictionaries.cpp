@@ -9,7 +9,7 @@
 #include <boost/assign/list_of.hpp>
 #include <boost/make_shared.hpp>
 
-#include "DustSim/InputOutput/dictionaries.h"
+#include "Dustsim/InputOutput/dictionaries.h"
 
 namespace dustsim
 {
