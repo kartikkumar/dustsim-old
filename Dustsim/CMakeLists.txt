@@ -88,7 +88,7 @@ macro(setup_unit_test_target target_name)
 endmacro(setup_unit_test_target)
 
 # Set the main sub-directories.
-# set(APPLICATIONMODES_DIR "/ApplicationModes")
+set(APPLICATIONMODES_DIR "/ApplicationModes")
 set(ASTRODYNAMICS_DIR "/Astrodynamics")
 # set(DATABASE_DIR "/Database")
 set(INPUTOUTPUT_DIR "/InputOutput")
@@ -124,7 +124,8 @@ endif()
 # Find Boost libraries on local system.
 find_package(Boost 1.52.0 
              COMPONENTS 
-             thread date_time system unit_test_framework filesystem regex serialization 
+             thread date_time system unit_test_framework filesystem regex serialization chrono
+             timer
              REQUIRED)
 
 # Include Boost directories.
@@ -224,7 +225,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # Set sub-directories.
-set(SUBDIRS ${ASTRODYNAMICS_DIR} #${APPLICATIONMODES_DIR}
+set(SUBDIRS ${ASTRODYNAMICS_DIR} ${APPLICATIONMODES_DIR}
             #${DATABASE_DIR} 
             ${INPUTOUTPUT_DIR} ${MATHEMATICS_DIR})  
 
@@ -237,7 +238,7 @@ endforeach(CURRENT_SUBDIR)
 add_executable(dustsim "${SOURCE_ROOT}/dustsim.cpp")
 setup_executable_target(dustsim)
 target_link_libraries(dustsim
-                      # dustsim_application_modes 
+                      dustsim_application_modes 
                       dustsim_astrodynamics #dustsim_database  
                       dustsim_input_output dustsim_mathematics
                       assist_input_output 

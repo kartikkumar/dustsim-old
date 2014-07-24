@@ -11,6 +11,7 @@
 #include <string>
 
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/timer/timer.hpp>
 
 #include <Assist/InputOutput/basicInputOutput.h>
 
@@ -19,15 +20,19 @@
 #include <Tudat/InputOutput/separatedParser.h>
 #include <Tudat/InputOutput/parsedDataVectorUtilities.h>
 
-// #include "Dustsim/ApplicationModes/randomWalkDatabaseGenerator.h"
-// #include "Dustsim/ApplicationModes/randomWalkSimulator.h" 
-// #include "Dustsim/ApplicationModes/testParticleDatabaseGenerator.h"
-// #include "Dustsim/ApplicationModes/testParticleSimulator.h"
+#include "Dustsim/ApplicationModes/singleParticleSimulator.h"
 #include "Dustsim/InputOutput/dictionaries.h"
 
 //! Execute Dustsim.
 int main( const int numberOfInputs, const char* inputArguments[ ] )
 {
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Start timer. Timer automatically ends when this object goes out of scope.
+    boost::timer::auto_cpu_timer timer;
+
+    ///////////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////////
 
     // Declare using-statements.
@@ -46,7 +51,7 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     using namespace tudat::input_output::field_types::general;
     using namespace tudat::input_output::parsed_data_vector_utilities;
 
-    // using namespace dustsim::application_modes;
+    using namespace dustsim::application_modes;
     using namespace dustsim::input_output;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -99,19 +104,19 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     if ( iequals( applicationMode, "SPS" ) )
     {
         cout << "SINGLE PARTICLE SIMULATOR" << endl;
-        // executeSingleParticleSimulator( databasePath, parsedData );
+        executeSingleParticleSimulator( parsedData );
     }    
 
     else if ( iequals( applicationMode, "BPS" ) )
     {
         cout << "BULK PARTICLE SIMULATOR" << endl;
-        // executeBulkParticleSimulator( databasePath, parsedData );
+        // executeBulkParticleSimulator( parsedData );
     } 
 
     else if ( iequals( applicationMode, "BPDG" ) )
     {
         cout << "BULK PARTICLE DATABASE GENERATOR" << endl;
-        // executeBulkParticleDatabaseGenerator( databasePath, parsedData );        
+        // executeBulkParticleDatabaseGenerator( parsedData );        
     }    
 
     else
@@ -124,6 +129,9 @@ int main( const int numberOfInputs, const char* inputArguments[ ] )
     ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////
+
+    // Print timing information.
+    cout << "Timing information: ";
 
     // If program is successfully completed, return 0.
     return EXIT_SUCCESS;
