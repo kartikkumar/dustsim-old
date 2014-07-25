@@ -6,7 +6,6 @@
  * See http://bit.ly/12SHPLR for license details.
  */
 
-// #include <cstdlib>
 // #include <fstream>
 // #include <iomanip>
 // #include <iostream>
@@ -50,7 +49,7 @@ namespace application_modes
 void executeSingleParticleSimulator( 
     const tudat::input_output::parsed_data_vector_utilities::ParsedDataVectorPtr parsedData )
 {
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     // // Declare using-statements.
     // using std::cerr;
@@ -84,35 +83,14 @@ void executeSingleParticleSimulator(
     // using namespace dustsim::input_output;    
     // using namespace dustsim::mathematics;        
 
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
-    // ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
-    // // Set up input deck.
+    // Extract input parameters.
 
-    // // Check number of input parameters is correct (the numberOfInputs variable includes the
-    // // application itself, so one is subtracted from this number).
-    // checkNumberOfInputArguments( numberOfInputs - 1 );
-
-    // // Read and filter input stream.
-    // string filteredInput = readAndFilterInputFile( inputArguments[ 1 ] );
-
-    // // Declare a separated parser.
-    // SeparatedParser parser( string( ": " ), 2, parameterName, parameterValue );
-
-    // // Parse filtered data.
-    // const ParsedDataVectorPtr parsedData = parser.parse( filteredInput ); 
-
-    // cout << endl;
-    // cout << "****************************************************************************" << endl;
-    // cout << "Input parameters" << endl;
-    // cout << "****************************************************************************" << endl;
-    // cout << endl;
-
-    // // Extract input parameters.
-
-    // // Get dictionary of general parameters.
-    // const DictionaryPointer generalParametersDictionary = getGeneralParametersDictionary( );
+    // Get dictionary.
+    // const DictionaryPointer dictionary = getSingleParticleSimulatorDictionary( );
 
     // // Extract general parameters.
     // const string caseName = extractParameterValue< string >(

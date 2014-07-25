@@ -28,11 +28,11 @@ DictionaryPointer getGeneralParametersDictionary( )
 
     // Add parameters.
     addEntry( dictionary, "MODE",                                  1, 0 );  
-    addEntry( dictionary, "CASE",                                  0, 0 );
-    addEntry( dictionary, "MAXIMUMSIMULATIONPERIOD",               0, 0, list_of( "PMAX" ) );  
-    addEntry( dictionary, "STARTEPOCH",                            0, 0, list_of( "TSTART" ) );
-    addEntry( dictionary, "FILEOUTPUTDIRECTORY",                   0, 0, 
-                list_of( "FILEOUTPUTDIR" ) );
+    // addEntry( dictionary, "CASE",                                  0, 0 );
+    // addEntry( dictionary, "MAXIMUMSIMULATIONPERIOD",               0, 0, list_of( "PMAX" ) );  
+    // addEntry( dictionary, "STARTEPOCH",                            0, 0, list_of( "TSTART" ) );
+    // addEntry( dictionary, "FILEOUTPUTDIRECTORY",                   0, 0, 
+    //             list_of( "FILEOUTPUTDIR" ) );
     
     return dictionary;  
 }
